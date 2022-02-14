@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Post} from "../model/post";
-import { PostService} from "../post.service";
+import { PostService} from "../services/post.service";
 import {newArray} from "@angular/compiler/src/util";
 
 @Component({

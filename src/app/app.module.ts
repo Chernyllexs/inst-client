@@ -6,19 +6,24 @@ import { AppComponent } from './app.component';
 import { PostCardComponent } from './post-card/post-card.component';
 import {FormsModule} from "@angular/forms";
 import { PostListComponent } from './post-list/post-list.component';
+import {PostService} from "./services/post.service";
+import {Post} from "./model/post";
 
 @NgModule({
   declarations: [
     AppComponent,
     PostCardComponent,
-    PostListComponent
+    PostListComponent,
+
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    PostService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
