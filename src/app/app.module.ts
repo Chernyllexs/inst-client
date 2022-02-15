@@ -12,11 +12,13 @@ import {MatCardModule} from '@angular/material/card';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatButtonModule} from '@angular/material/button'
 import {ScoresService} from "./services/scores.service";
+import { PostCardComponent } from './post-card/post-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PostListComponent,
+    PostCardComponent,
 
   ],
   imports: [
