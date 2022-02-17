@@ -1,18 +1,18 @@
 <mat-card  class="post-card">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>user id: {{post.userId}}</mat-card-title>
+    <mat-card-title>user id: {{userId}}</mat-card-title>
     <mat-card-subtitle>tag</mat-card-subtitle>
   </mat-card-header>
-  <img mat-card-image src="{{getPhotoUrl(post.photoId)}}" alt="Photo of post">
+  <img mat-card-image src="{{getPhotoUrl(photoId)}}" alt="Photo of post">
   <mat-card-content>
-    <p>{{post.postText}}</p>
+    <p>{{postText}}</p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="primary"
-            matBadge="{{getLikes(1)}}" matBadgePosition="before" matBadgeColor="accent">
+    <!--<button mat-raised-button color="primary"
+            matBadge="{{getLikes(photoId)}}" matBadgePosition="before" matBadgeColor="accent">
       LIKE
-    </button>
+    </button>-->
     <button mat-raised-button color="primary"
             matBadge="8" matBadgePosition="after" matBadgeColor="accent">
       DISLIKE

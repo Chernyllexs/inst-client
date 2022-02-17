@@ -1,4 +1,12 @@
-<div *ngFor = "let post of posts" class="post">
-  <app-post-card[post]></app-post-card>
+<div>
+  <app-post-card
+        *ngFor = "let post of posts" class="post"
+        [postId] ="post.postId"
+        [userId]="post.userId"
+        [photoId]="post.photoId"
+        [postText]="post.postText"
+        [postDate]="post.postDate"
+    >
+  </app-post-card>
 </div>
 
