@@ -13,12 +13,16 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatButtonModule} from '@angular/material/button'
 import {ScoresService} from "./services/scores.service";
 import { PostCardComponent } from './post-card/post-card.component';
+import { ScoresComponent } from './scores/scores.component';
+import { CommentsComponent } from './comments/comments.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PostListComponent,
     PostCardComponent,
+    ScoresComponent,
+    CommentsComponent,
 
   ],
   imports: [

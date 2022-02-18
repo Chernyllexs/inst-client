@@ -7,15 +7,10 @@
   <img mat-card-image src="{{getPhotoUrl(photoId)}}" alt="Photo of post">
   <mat-card-content>
     <p>{{postText}}</p>
+    <p>post Id: {{postId}}</p>
   </mat-card-content>
   <mat-card-actions>
-    <!--<button mat-raised-button color="primary"
-            matBadge="{{getLikes(photoId)}}" matBadgePosition="before" matBadgeColor="accent">
-      LIKE
-    </button>-->
-    <button mat-raised-button color="primary"
-            matBadge="8" matBadgePosition="after" matBadgeColor="accent">
-      DISLIKE
-    </button>
+    <app-scores
+      [postId] ="postId"></app-scores>
   </mat-card-actions>
 </mat-card>
