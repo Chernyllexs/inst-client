@@ -10,11 +10,14 @@ import {Post} from "./model/post";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
 import {MatBadgeModule} from '@angular/material/badge';
-import {MatButtonModule} from '@angular/material/button'
+import {MatButtonModule} from '@angular/material/button';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
 import {ScoresService} from "./services/scores.service";
 import { PostCardComponent } from './post-card/post-card.component';
 import { ScoresComponent } from './scores/scores.component';
 import { CommentsComponent } from './comments/comments.component';
+import { CommentsListComponent } from './comments-list/comments-list.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,7 @@ import { CommentsComponent } from './comments/comments.component';
     PostCardComponent,
     ScoresComponent,
     CommentsComponent,
+    CommentsListComponent,
 
   ],
   imports: [
@@ -32,7 +36,9 @@ import { CommentsComponent } from './comments/comments.component';
     BrowserAnimationsModule,
     MatCardModule,
     MatBadgeModule,
-    MatButtonModule
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   providers: [
     PostService,

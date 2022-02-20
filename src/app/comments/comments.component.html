@@ -1,1 +1,9 @@
-<p>comments works!</p>
+<div class="comment-list">
+    <mat-card class="comment-card">
+      <mat-card-title>userId: {{userId}}</mat-card-title>
+      <mat-card-content>
+        <p>Text: {{commentText}}</p>
+        {{commentDate | date:"mm:hh dd MMM"}}
+      </mat-card-content>
+    </mat-card>
+</div>

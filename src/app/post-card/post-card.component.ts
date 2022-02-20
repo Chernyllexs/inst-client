@@ -25,7 +25,11 @@ export class PostCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public getPhotoUrl(postId: number): string{
+  public getPhotoPostUrl(postId: number): string{
+    return "http://localhost:9000/photo/get-post-photo/" + postId;
+  }
+
+  public getPhotoAvatarUrl(postId: number): string{
     return "http://localhost:9000/photo/get-post-photo/" + postId;
   }
 

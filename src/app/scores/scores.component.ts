@@ -12,7 +12,7 @@ export class ScoresComponent implements OnInit {
   numberOfLikes: number | undefined = 0;
   numberOfDislikes: number | undefined = 0;
 
-  @Input('postId') postId: number = 0;
+  @Input() postId: number = 0;
 
   constructor(private scoresService:ScoresService) { }
 
@@ -22,8 +22,6 @@ export class ScoresComponent implements OnInit {
       this.numberOfDislikes = data.numberOfDislikes;
     });
 
-    console.log(this.numberOfLikes);
-    console.log(this.postId + " postId ");
   }
 
 

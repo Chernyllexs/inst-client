@@ -1,16 +1,22 @@
 <mat-card  class="post-card">
   <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
+    <div mat-card-avatar class="example-header-image">
+      <!--<img src="{{getPhotoAvatarUrl(userId)}}">-->
+    </div>
     <mat-card-title>user id: {{userId}}</mat-card-title>
     <mat-card-subtitle>tag</mat-card-subtitle>
   </mat-card-header>
-  <img mat-card-image src="{{getPhotoUrl(photoId)}}" alt="Photo of post">
+  <img mat-card-image src="{{getPhotoPostUrl(photoId)}}" alt="Photo of post">
   <mat-card-content>
     <p>{{postText}}</p>
     <p>post Id: {{postId}}</p>
   </mat-card-content>
   <mat-card-actions>
     <app-scores
-      [postId] ="postId"></app-scores>
+      [postId] ="postId">
+    </app-scores>
+    <app-comments-list
+      [postId] ="postId">
+    </app-comments-list>
   </mat-card-actions>
 </mat-card>
