@@ -19,6 +19,7 @@ import { ScoresComponent } from './scores/scores.component';
 import { CommentsComponent } from './comments/comments.component';
 import { CommentsListComponent } from './comments-list/comments-list.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +28,7 @@ import { CommentsListComponent } from './comments-list/comments-list.component';
     ScoresComponent,
     CommentsComponent,
     CommentsListComponent,
+
 
   ],
   imports: [
