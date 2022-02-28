@@ -1,0 +1,13 @@
+
+{
+  "/api/*": {
+    "target":  {
+      "host": "localhost",
+      "protocol": "http:",
+      "port": 9000
+    },
+    "logLevel": "debug"
+
+
+  }
+}

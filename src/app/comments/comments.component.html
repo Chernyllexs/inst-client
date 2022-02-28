@@ -1,9 +1,9 @@
 <mat-card class="comment-card">
   <mat-card-header>
     <!--<div mat-card-avatar class="example-header-image"></div>-->
-    <div mat-card-avatar [ngStyle]="{backgroundImage: getAvatarPhotoUrl(userId)}" class="example-header-image"></div>
+    <div mat-card-avatar [ngStyle]="{backgroundImage: getAvatarPhotoUrl(userId)}" class="comment-avatar"></div>
     <mat-card-title>userId: {{userId}}</mat-card-title>
-    <div class="comment-date">{{commentDate | date:"mm:hh dd MMM"}}</div>
+    <div class="comment-date">{{commentDate | date:"H:m dd MMM"}}</div>
     <mat-card-subtitle>Text: {{commentText}}</mat-card-subtitle>
   </mat-card-header>
 </mat-card>

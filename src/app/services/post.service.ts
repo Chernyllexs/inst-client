@@ -5,10 +5,10 @@ import { Observable } from "rxjs";
 
 @Injectable()
 export class PostService {
-  private postsUrl: string;
+  private postsUrl: string = '/api/post';
+
 
   constructor(private http: HttpClient) {
-    this.postsUrl = 'http://localhost:9000/post';
   }
 
   public getAllPostsForUser(): Observable<Post[]> {

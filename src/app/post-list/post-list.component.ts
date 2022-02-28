@@ -12,18 +12,23 @@ import { PostService } from "../services/post.service";
 export class PostListComponent implements OnInit {
 
   posts: Post[] = [];
+  loading: boolean = false;
 
 
   constructor(private postService: PostService) {
   }
 
   ngOnInit(): void {
-    this.postService.getAllPostsForUser().subscribe(data => {
-      this.posts = data;
-    });
+    this.fetchPosts();
   }
 
-
+  fetchPosts(){
+    this.loading = true;
+    this.postService.getAllPostsForUser().subscribe(data => {
+      this.posts = data;
+      this.loading = false;
+    });
+  }
 
 
 }

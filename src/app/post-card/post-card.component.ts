@@ -26,11 +26,11 @@ export class PostCardComponent implements OnInit {
   }
 
   public getPhotoPostUrl(postId: number): string{
-    return "http://localhost:9000/photo/get-post-photo/" + postId;
+    return '/api/photo/get-post-photo/' + postId;
   }
 
   public getPhotoAvatarUrl(postId: number): string{
-    return "http://localhost:9000/photo/get-post-photo/" + postId;
+    return '/api/photo/get-post-photo/' + postId;
   }
 
 }

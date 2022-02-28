@@ -6,8 +6,29 @@
     [commentDate]="currentComment.commentDate"
     [commentText]="currentComment.commentText"
     >
-  <div class="add-comment">
-
-  </div>
   </app-comments>
 </div>
+
+<!--<form class="add-comment-form" [formGroup]="form" (ngSubmit)="submit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Input</mat-label>
+    <input matInput formControlName= "comment">
+  </mat-form-field>
+
+  <button mat-icon-button color="primary" type="submit" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>send</mat-icon>
+  </button>
+
+</form>-->
+
+<form class="add-comment-form">
+  <mat-form-field appearance="fill">
+    <mat-label>Add a comment</mat-label>
+    <input matInput [(ngModel)]="commentText" name="comment">
+  </mat-form-field>
+
+  <button mat-icon-button color="primary" (click)="addComment(1)" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>send</mat-icon>
+  </button>
+
+</form>

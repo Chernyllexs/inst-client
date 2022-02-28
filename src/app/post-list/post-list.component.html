@@ -1,12 +1,32 @@
-<div>
+<div *ngIf="!loading; else loadingBlock">
   <app-post-card
-        *ngFor = "let post of posts" class="post"
-        [postId] ="post.postId"
-        [userId]="post.userId"
-        [photoId]="post.photoId"
-        [postText]="post.postText"
-        [postDate]="post.postDate"
-    >
+    *ngFor="let post of posts" class="post"
+    [postId]="post.postId"
+    [userId]="post.userId"
+    [photoId]="post.photoId"
+    [postText]="post.postText"
+    [postDate]="post.postDate"
+  >
   </app-post-card>
 </div>
+<ng-template #loadingBlock class="loadingBlock">
 
+  <mat-card class="post-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Loading...</mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+
+
+    <mat-card-content>
+
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </mat-card-actions>
+  </mat-card>
+</ng-template>

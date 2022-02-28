@@ -1,8 +1,15 @@
-<button mat-raised-button color="primary"
-        matBadge="{{numberOfLikes}}" matBadgePosition="before" matBadgeColor="accent">
-  LIKE
+
+<button mat-icon-button color="primary" (click)="addScore(true, 1)" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"
+        matBadge="{{scores.numberOfLikes}}" matBadgePosition="after" matBadgeColor="accent">
+  <mat-icon [ngStyle]="{'color': likeBtnColor}">thumb_up</mat-icon>
 </button>
-<button mat-raised-button color="primary"
-        matBadge="{{numberOfDislikes}}" matBadgePosition="after" matBadgeColor="accent">
-  DISLIKE
+
+<button mat-icon-button color="primary" (click)="addScore(false, 1)" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"
+        matBadge="{{scores.numberOfDislikes}}" matBadgePosition="after" matBadgeColor="accent">
+  <mat-icon [ngStyle]="{'color': dislikeBtnColor}">thumb_down</mat-icon>
 </button>
+
+
+
+
+
