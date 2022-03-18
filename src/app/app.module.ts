@@ -21,6 +21,10 @@ import {CommentsListComponent} from './comments-list/comments-list.component';
 import {MatInputModule} from "@angular/material/input";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { PostCreateComponent } from './post-create/post-create.component';
+import {AppRoutingModule} from "./app-routing.module";
+import { LoginComponent } from './login/login.component';
+
 
 
 @NgModule({
@@ -31,10 +35,13 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     ScoresComponent,
     CommentsComponent,
     CommentsListComponent,
+    PostCreateComponent,
+    LoginComponent,
 
 
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,

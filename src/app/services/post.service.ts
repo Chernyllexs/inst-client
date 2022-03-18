@@ -15,8 +15,8 @@ export class PostService {
     return this.http.get<Post[]>(this.postsUrl + '/get-all-posts-for-user/1');
   }
 
-  public save(user: Post) {
-    return this.http.post<Post>(this.postsUrl, user);
+  public createPost(data: FormData) {
+    return this.http.post<Post>(this.postsUrl + '/create', data);
   }
 
 

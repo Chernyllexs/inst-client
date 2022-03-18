@@ -1,8 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ScoresService} from "../services/scores.service";
-import {ScoreAdd} from "../model/scoreAdd";
-import {error} from "@angular/compiler/src/util";
 import {Score} from "../model/score";
+import {ScoreAdd} from "../model/scoreAdd";
+
+export interface UserStateScore {
+  isLiked: boolean,
+  isDisliked: boolean,
+  dislikeBtnColor: string,
+  likeBtnColor: string
+}
 
 @Component({
   selector: 'app-scores',
@@ -11,17 +17,21 @@ import {Score} from "../model/score";
 })
 export class ScoresComponent implements OnInit {
   @Input() postId: number = 0;
+  userId: number = 1;
+  redColor = 'red';
 
   scores: Score = {
     numberOfLikes: 0,
     numberOfDislikes: 0
   }
 
-  dislikeBtnColor: string = '';
-  likeBtnColor: string = '';
-  scoreIsAdded: boolean = false;
+  userStateScore: UserStateScore = {
+    isLiked: false,
+    isDisliked: false,
+    dislikeBtnColor: '',
+    likeBtnColor: ''
+  }
 
-  userId: number = 1;
 
   constructor(private scoresService: ScoresService) {
   }
@@ -31,56 +41,60 @@ export class ScoresComponent implements OnInit {
       this.scores = data;
     });
 
-    this.scoresService.getUserScoreForPost(this.postId, this.userId).subscribe(data => {
-      this.colorBtnScore(data);
-      this.scoreIsAdded = true;
-    }, error => {
-
-    });
-  }
-
-  addScore(state: boolean, userId: number) {
-    let scoreAdd: ScoreAdd = {
-      postId: this.postId,
-      userId: userId,
-      scoreState: state
-    }
-    this.scoresService.addScore(scoreAdd).subscribe(data => {
-      this.colorBtnScore(data.scoreState);
-      if (data.scoreState) {
-        this.setLike();
-        this.scores.numberOfLikes++;
-        if(this.scoreIsAdded){
-          this.scores.numberOfDislikes--;
-        }
+    this.scoresService.getUserScoreForPost(this.postId, this.userId).subscribe(scoreState => {
+      if (scoreState) {
+        this.userStateScore.isLiked = true;
+        this.userStateScore.likeBtnColor = this.redColor;
       } else {
-        this.setDislike();
-        this.scores.numberOfDislikes++;
-        if(this.scoreIsAdded){
-          this.scores.numberOfLikes--;
-        }
+        this.userStateScore.isDisliked = true;
+        this.userStateScore.dislikeBtnColor = this.redColor;
       }
     });
-
   }
 
-
-  colorBtnScore(state: boolean) {
-    if (state) {
-      this.setLike();
-
+  addScore(isLiked: boolean) {
+    if (isLiked === this.userStateScore.isLiked && !isLiked === this.userStateScore.isDisliked) {
+      this.scoresService.deleteUserScoreForPost(this.postId, this.userId).subscribe(response => {
+        this.scores = response;
+        this.resetLike();
+        this.resetDislike();
+      });
     } else {
-      this.setDislike();
+      let scoreAdd: ScoreAdd = {
+        postId: this.postId,
+        userId: this.userId,
+        scoreState: isLiked
+      }
+
+      this.scoresService.addScore(scoreAdd).subscribe(data => {
+        if (data.scoreState) {
+          if(this.userStateScore.isDisliked){
+            this.resetDislike();
+            this.scores.numberOfDislikes --;
+          }
+          this.userStateScore.isLiked = true;
+          this.userStateScore.likeBtnColor = this.redColor;
+          this.scores.numberOfLikes ++;
+        } else {
+          if(this.userStateScore.isLiked){
+            this.resetLike();
+            this.scores.numberOfLikes --;
+          }
+          this.userStateScore.isDisliked = true;
+          this.userStateScore.dislikeBtnColor = this.redColor;
+          this.scores.numberOfDislikes ++;
+        }
+      });
     }
   }
 
-  setLike() {
-    this.likeBtnColor = 'red';
-    this.dislikeBtnColor = '';
+  public resetLike(){
+    this.userStateScore.isLiked = false;
+    this.userStateScore.likeBtnColor = '';
   }
 
-  setDislike() {
-    this.likeBtnColor = '';
-    this.dislikeBtnColor = 'red';
+  public resetDislike(){
+    this.userStateScore.isDisliked = false;
+    this.userStateScore.dislikeBtnColor = '';
   }
 }

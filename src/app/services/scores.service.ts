@@ -13,7 +13,7 @@ export class ScoresService {
   }
 
   public getScoreForPost(postId: number): Observable<Score>{
-    return this.http.get<Score>(this.scoreUrl + '/get-number-score-for-post/' + postId);
+    return this.http.get<Score>(this.scoreUrl + `/get-number-score-for-post/${postId}`);
   }
 
  /* public addScore(score: ScoreAdd): Observable<Score> {
@@ -26,6 +26,11 @@ export class ScoresService {
 
   public getUserScoreForPost(postId: number, userId: number): Observable<boolean>{
     /*return this.http.get<boolean>(this.scoreUrl + '/get-user-score-for-post/${postId}/${userId}');*/
-    return this.http.get<boolean>(this.scoreUrl + '/get-user-score-for-post/' + postId + '/' + userId);
+    //return this.http.get<boolean>(this.scoreUrl + '/get-user-score-for-post/' + postId + '/' + userId);
+    return this.http.get<boolean>(this.scoreUrl + `/get-user-score-for-post/${postId}/${userId}`);
+  }
+
+  public deleteUserScoreForPost(postId: number, userId: number): Observable<Score>{
+    return this.http.delete<Score>(this.scoreUrl + `/delete-user-score-for-post/${postId}/${userId}`)
   }
 }
