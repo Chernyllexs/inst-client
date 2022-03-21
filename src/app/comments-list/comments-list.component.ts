@@ -15,16 +15,17 @@ export class CommentsListComponent implements OnInit {
 
   @Input() postId: number = 0;
 
-  commentDto:CommentPaginated = {
-    numberOfPages: 0,
+  commentDto: CommentPaginated = {
+    commentsPerPage: 5,
     currentPage: 0,
     numberOfComments: 0,
     comments: []
   }
 
+  array: Comment[] | undefined
 
   form: FormGroup;
-  commentText: string ='';
+  commentText: string = '';
 
   pageSizeOptions: number[] = [5, 10, 25];
 
@@ -36,50 +37,53 @@ export class CommentsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    /*this.commentsService.getFiveCommentsForPost(this.postId).subscribe(data =>{
-      this.comments = data;
-    });*/
-    this.commentsService.getPaginated(this.postId,this.commentDto.currentPage,this.commentDto.numberOfComments).subscribe(data =>{
+    this.loadComments(this.postId, this.commentDto.currentPage, this.commentDto.commentsPerPage);
+
+  }
+
+
+  onChangePage(pe: PageEvent) {
+    this.commentDto.currentPage = pe.pageIndex;
+    this.commentDto.commentsPerPage = pe.pageSize;
+    this.loadComments(this.postId, this.commentDto.currentPage, this.commentDto.commentsPerPage);
+  }
+
+  loadComments(postId: number, pageNo: number, pageSize: number) {
+    this.commentsService.getPaginated(postId, pageNo, pageSize).subscribe(data => {
+      this.commentDto = data;
       // @ts-ignore
-      this.commentDto.comments = data.comments;
-      this.commentDto.numberOfComments = data.numberOfComments;
-      this.commentDto.currentPage = data.currentPage;
+      this.array = data.comments;
     })
-
   }
 
-
-  onChangePage(pe:PageEvent) {
-    console.log(pe.pageIndex);
-    console.log(pe.pageSize);
-  }
-
-
-
-  submit() {
-    const formData = {... this.form.value}
-    console.log(formData)
-
-  }
+  /*
+    submit() {
+      const formData = {...this.form.value}
+      console.log(formData)
+    }
+    */
 
   addComment(userId: number) {
-    if(!this.commentText.trim()){
+    if (this.commentText.trim().length < 3) {
       return
     }
-    let newComment: CommentCreate ={
+    let newComment: CommentCreate = {
       postId: this.postId,
       userId: userId,
       commentText: this.commentText
     }
-    this.commentsService.addComment(newComment).subscribe(comment =>{
+    this.commentsService.addComment(newComment).subscribe(comment => {
       // @ts-ignore
       this.commentDto.comments.push(comment);
-      if(this.commentDto.comments.length > 5){
-        this.commentDto.comments.splice( this.commentDto.comments.length-6,1)
+      if (this.commentDto.comments.length > this.commentDto.commentsPerPage) {
+        this.commentDto.currentPage++;
+        this.loadComments(this.postId, this.commentDto.currentPage, this.commentDto.commentsPerPage);
       }
       this.commentText = '';
-      /*console.log(comment)*/
     });
-    /*console.log(this.comments)*/
+  }
+
+  submit() {
+
   }
 }

@@ -23,11 +23,7 @@ export class CommentsService {
     return this.http.post<Comment>( this.commentUrl + '/create-comment', newComment);
   }
 
-  public getPaginatedDefault(postId:number): Observable<CommentPaginated>{
-    return this.http.get<CommentPaginated>(this.commentUrl + `/get-paginated/${postId}`)
-  }
-
-  public getPaginated(postId:number, pageNo:number, pageSize:number,): Observable<CommentPaginated>{
+  public getPaginated(postId:number, pageNo:number, pageSize:number): Observable<CommentPaginated>{
     return this.http.get<CommentPaginated>(this.commentUrl + `/get-paginated/${postId}/${pageNo}/${pageSize}`)
   }
 }

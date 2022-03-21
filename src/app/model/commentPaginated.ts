@@ -1,5 +1,7 @@
+import {Comment} from "./comment";
+
 export interface CommentPaginated {
-  numberOfPages: number,
+  commentsPerPage: number,
   currentPage: number,
   numberOfComments: number,
   comments: Comment[]

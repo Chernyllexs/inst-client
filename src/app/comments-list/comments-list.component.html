@@ -1,20 +1,27 @@
 <div class="comment">
-  <app-comments
-    *ngFor="let currentComment of commentDto.comments"
-    [comment]="currentComment" >
-  </app-comments>
+
+    <ng-template *ngIf="commentDto?.comments">
+      <app-comments *ngFor="let currentComment of commentDto.comments"
+                    [comment]="currentComment" >
+      </app-comments>
+    </ng-template>
+
+
+
+
 
   <mat-paginator
     (page)="onChangePage($event)"
-    [length]="commentDto.numberOfPages"
-    [pageSize]="commentDto.numberOfComments"
+    [length]="commentDto.numberOfComments"
+    [pageSize]="commentDto.commentsPerPage"
     [pageSizeOptions]="pageSizeOptions"
     aria-label="Select page">
   </mat-paginator>
 
 </div>
 
-<!--<form class="add-comment-form" [formGroup]="form" (ngSubmit)="submit()">
+<!--
+<form class="add-comment-form" [formGroup]="form" (ngSubmit)="submit()">
   <mat-form-field appearance="fill">
     <mat-label>Input</mat-label>
     <input matInput formControlName= "comment">
@@ -24,7 +31,11 @@
     <mat-icon>send</mat-icon>
   </button>
 
-</form>-->
+</form>
+
+-->
+
+<!--
 
 <form class="add-comment-form">
   <mat-form-field appearance="fill">
@@ -38,3 +49,4 @@
   </button>
 
 </form>
+-->
