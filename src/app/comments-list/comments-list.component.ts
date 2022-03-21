@@ -3,6 +3,8 @@ import {CommentsService} from "../services/comments.service";
 import {Comment} from "../model/comment";
 import {FormControl, FormGroup} from "@angular/forms";
 import {CommentCreate} from "../model/commentCreate";
+import {PageEvent} from "@angular/material/paginator";
+import {CommentPaginated} from "../model/commentPaginated";
 
 @Component({
   selector: 'app-comments-list',
@@ -12,10 +14,20 @@ import {CommentCreate} from "../model/commentCreate";
 export class CommentsListComponent implements OnInit {
 
   @Input() postId: number = 0;
-  comments: Comment[] = [];
+
+  commentDto:CommentPaginated = {
+    numberOfPages: 0,
+    currentPage: 0,
+    numberOfComments: 0,
+    comments: []
+  }
+
 
   form: FormGroup;
   commentText: string ='';
+
+  pageSizeOptions: number[] = [5, 10, 25];
+
 
   constructor(private commentsService: CommentsService) {
     this.form = new FormGroup({
@@ -24,10 +36,25 @@ export class CommentsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.commentsService.getFiveCommentsForPost(this.postId).subscribe(data =>{
+    /*this.commentsService.getFiveCommentsForPost(this.postId).subscribe(data =>{
       this.comments = data;
-    });
+    });*/
+    this.commentsService.getPaginated(this.postId,this.commentDto.currentPage,this.commentDto.numberOfComments).subscribe(data =>{
+      // @ts-ignore
+      this.commentDto.comments = data.comments;
+      this.commentDto.numberOfComments = data.numberOfComments;
+      this.commentDto.currentPage = data.currentPage;
+    })
+
   }
+
+
+  onChangePage(pe:PageEvent) {
+    console.log(pe.pageIndex);
+    console.log(pe.pageSize);
+  }
+
+
 
   submit() {
     const formData = {... this.form.value}
@@ -45,9 +72,10 @@ export class CommentsListComponent implements OnInit {
       commentText: this.commentText
     }
     this.commentsService.addComment(newComment).subscribe(comment =>{
-      this.comments.push(comment);
-      if(this.comments.length > 5){
-        this.comments.splice( this.comments.length-6,1)
+      // @ts-ignore
+      this.commentDto.comments.push(comment);
+      if(this.commentDto.comments.length > 5){
+        this.commentDto.comments.splice( this.commentDto.comments.length-6,1)
       }
       this.commentText = '';
       /*console.log(comment)*/

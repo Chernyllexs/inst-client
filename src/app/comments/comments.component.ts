@@ -1,5 +1,5 @@
 import {Component, ElementRef, Input, OnInit} from '@angular/core';
-import {FormGroup} from "@angular/forms";
+import {Comment} from "../model/comment";
 
 
 @Component({
@@ -9,20 +9,32 @@ import {FormGroup} from "@angular/forms";
 })
 export class CommentsComponent implements OnInit {
 
-  @Input('commentId') commentId: number = 0;
+  /*comment:Comment = {
+    commentId: 0,
+    userId: 0,
+    commentDate: Date(),
+    commentText: ''
+  }*/
+
+  /*@Input('commentId') commentId: number = 0;
   @Input('userId') userId: number = 0;
   @Input('commentDate') commentDate: string = '';
-  @Input('commentText') commentText: string = '';
+  @Input('commentText') commentText: string = '';*/
+
+  @Input() comment:Comment = {
+    commentId: 0,
+    userId: 0,
+    commentDate: '',
+    commentText: ''
+  }
 
   str: string = '';
 
 
-  constructor(private elementRef: ElementRef) {
-
+  constructor() {
   }
 
   ngOnInit(): void {
-
   }
 
   public getAvatarPhotoUrl(userId: number): string {

@@ -24,6 +24,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { PostCreateComponent } from './post-create/post-create.component';
 import {AppRoutingModule} from "./app-routing.module";
 import { LoginComponent } from './login/login.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 
 
@@ -55,7 +56,8 @@ import { LoginComponent } from './login/login.component';
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatPaginatorModule
   ],
   providers: [
     PostService,
