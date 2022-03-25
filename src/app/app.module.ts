@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 
@@ -25,8 +25,25 @@ import { PostCreateComponent } from './post-create/post-create.component';
 import {AppRoutingModule} from "./app-routing.module";
 import { LoginComponent } from './login/login.component';
 import {MatPaginatorModule} from "@angular/material/paginator";
+import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
+import {CommentsService} from "./services/comments.service";
 
 
+function initializeKeycloak(keycloak: KeycloakService) {
+  return () =>
+    keycloak.init({
+      config: {
+        url: 'http://localhost:8484/auth',
+        realm: 'inst-project',
+        clientId: 'inst-client'
+      },
+      initOptions: {
+        onLoad: 'check-sso',
+        silentCheckSsoRedirectUri:
+          window.location.origin + '/assets/silent-check-sso.html'
+      }
+    });
+}
 
 @NgModule({
   declarations: [
@@ -45,6 +62,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     AppRoutingModule,
     BrowserModule,
     HttpClientModule,
+    KeycloakAngularModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
@@ -60,8 +78,15 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     MatPaginatorModule
   ],
   providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService]
+    },
     PostService,
-    ScoresService
+    ScoresService,
+    CommentsService
   ],
   bootstrap: [AppComponent]
 })

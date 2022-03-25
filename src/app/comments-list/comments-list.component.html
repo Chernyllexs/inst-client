@@ -1,10 +1,10 @@
 <div class="comment">
 
-    <ng-template *ngIf="commentDto?.comments">
+
       <app-comments *ngFor="let currentComment of commentDto.comments"
                     [comment]="currentComment" >
       </app-comments>
-    </ng-template>
+
 
 
 
@@ -20,7 +20,7 @@
 
 </div>
 
-<!--
+
 <form class="add-comment-form" [formGroup]="form" (ngSubmit)="submit()">
   <mat-form-field appearance="fill">
     <mat-label>Input</mat-label>
@@ -33,7 +33,7 @@
 
 </form>
 
--->
+
 
 <!--
 

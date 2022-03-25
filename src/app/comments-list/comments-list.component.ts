@@ -38,7 +38,6 @@ export class CommentsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadComments(this.postId, this.commentDto.currentPage, this.commentDto.commentsPerPage);
-
   }
 
 

@@ -2,26 +2,57 @@
   <div class="row">
     <mat-toolbar color="primary">
       <span>Inst client</span>
+
       <span class="example-spacer"></span>
       <ul>
         <li class="active">
-          <a mat-button routerLink="/">Home</a>
+          <a mat-button *ngIf="isLoggedIn" routerLink="/">Home</a>
         </li>
         <li>
-          <a mat-button routerLink="/create-post">Create post</a>
+          <a mat-button *ngIf="isLoggedIn" routerLink="/create-post">Create post</a>
         </li>
         <li>
-          <button mat-button >Login</button>
-
+          <button mat-button *ngIf="!isLoggedIn" type="button" (click)="login()">Log in</button>
         </li>
         <li>
-          <button mat-button >Logout</button>
-
+          <button mat-button *ngIf="isLoggedIn" type="button" (click)="logout()">Log out</button>
         </li>
       </ul>
     </mat-toolbar>
 
-    <router-outlet></router-outlet>
+    <div *ngIf="userProfile">
+      <router-outlet></router-outlet>
+    </div>
+
 
   </div>
 </div>
+
+
+
+
+<!--<ng-container *ngIf="userProfile">
+  <h2>User information</h2>
+  <table>
+    <tr *ngIf="userProfile.username">
+      <th scope="row">Username</th>
+      <td>{{ userProfile.username }}</td>
+    </tr>
+    <tr *ngIf="userProfile.firstName">
+      <th scope="row">First name</th>
+      <td>{{ userProfile.firstName }}</td>
+    </tr>
+    <tr *ngIf="userProfile.lastName">
+      <th scope="row">First name</th>
+      <td>{{ userProfile.lastName }}</td>
+    </tr>
+    <tr *ngIf="userProfile.email">
+      <th scope="row">E-mail</th>
+      <td>{{ userProfile.email }}</td>
+    </tr>
+    <tr>
+      <th scope="row">E-mail verified</th>
+      <td>{{ userProfile.emailVerified ? 'Yes' : 'No' }}</td>
+    </tr>
+  </table>
+</ng-container>-->

@@ -41,7 +41,8 @@ export class ScoresComponent implements OnInit {
       this.scores = data;
     });
 
-    this.scoresService.getUserScoreForPost(this.postId, this.userId).subscribe(scoreState => {
+    this.scoresService.getUserScoreForPost(this.postId, this.userId).
+    subscribe(scoreState => {
       if (scoreState) {
         this.userStateScore.isLiked = true;
         this.userStateScore.likeBtnColor = this.redColor;
@@ -49,7 +50,11 @@ export class ScoresComponent implements OnInit {
         this.userStateScore.isDisliked = true;
         this.userStateScore.dislikeBtnColor = this.redColor;
       }
-    });
+    },
+      error =>{
+      console.log('error score service')
+      })
+    ;
   }
 
   addScore(isLiked: boolean) {
